@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SMS Spam Detection</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: white;
+            padding: 40px;
+            width: 500px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 30px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+        }
+
+        input[type="submit"] {
+            padding: 10px 25px;
+            border: none;
+            border-radius: 6px;
+            background-color: #007bff;
+            color: white;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        .result {
+            margin-top: 25px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .spam {
+            color: red;
+        }
+
+        .ham {
+            color: green;
+        }
+
+        .message-box {
+            margin-top: 15px;
+            font-size: 14px;
+            color: #555;
+            word-wrap: break-word;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>SMS Spam Detection</h1>
+
+        <form action="/predict" method="post">
+            <input 
+                type="text" 
+                name="message" 
+                placeholder="Enter your message here..."
+                value="{{ original_message if original_message else '' }}"
+                required
+            >
+            <input type="submit" value="Check Message">
+        </form>
+
+        {% if prediction_text %}
+            <div class="result 
+                {% if 'Spam' in prediction_text %}
+                    spam
+                {% else %}
+                    ham
+                {% endif %}
+            ">
+                {{ prediction_text }}
+            </div>
+
+            <div class="message-box">
+                Message Checked: "{{ original_message }}"
+            </div>
+        {% endif %}
+
+    </div>
+
+</body>
+</html>
