@@ -18,7 +18,7 @@ SMS_Spam_Detection/
 │
 ├── dataset/
 │     └── spam.csv
-│
+│     └── cleaned_spam.csv
 ├── notebooks/
 │     └── eda.ipynb
 │
@@ -29,8 +29,7 @@ SMS_Spam_Detection/
 ├── templates/
 │     └── index.html
 │
-├── src/
-│     └── train.py
+├── train_model.py
 │
 ├── app.py
 ├── requirements.txt
