@@ -7,7 +7,7 @@ import os
 
 from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.linear_model import LogisticRegression
+from sklearn.linear_model import RandomForestClassifier 
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix, roc_curve, auc
 
 
@@ -84,7 +84,13 @@ print("Vectorization Done")
 # 7. Model Training
 # ==============================
 
-model = LogisticRegression()
+model = RandomForestClassifier(
+    n_estimators=200,
+    max_depth=None,
+    random_state=42,
+    n_jobs=-1
+)
+
 model.fit(X_train_tfidf, y_train)
 
 print("Model Training Completed")
@@ -100,7 +106,6 @@ y_prob = model.predict_proba(X_test_tfidf)[:, 1]
 print("\nAccuracy:", accuracy_score(y_test, y_pred))
 print("\nClassification Report:\n")
 print(classification_report(y_test, y_pred))
-
 
 # ==============================
 # 9. Confusion Matrix
